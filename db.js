@@ -1,18 +1,11 @@
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const path = require('path');
 
 const dbPath = path.join(__dirname, 'inventory.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('数据库连接失败:', err.message);
-  } else {
-    console.log('已成功连接到SQLite数据库');
-    initDatabase();
-  }
-});
+const db = new Database(dbPath, { verbose: console.log });
 
 function initDatabase() {
-  db.run(`CREATE TABLE IF NOT EXISTS products (
+  db.exec(`CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     barcode TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
@@ -23,13 +16,9 @@ function initDatabase() {
     stock INTEGER NOT NULL DEFAULT 0,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-  )`, (err) => {
-    if (err) {
-      console.error('创建products表失败:', err.message);
-    }
-  });
+  )`);
 
-  db.run(`CREATE TABLE IF NOT EXISTS stock_records (
+  db.exec(`CREATE TABLE IF NOT EXISTS stock_records (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     product_id INTEGER NOT NULL,
     type TEXT NOT NULL CHECK(type IN ('in', 'out')),
@@ -37,11 +26,11 @@ function initDatabase() {
     remark TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(id)
-  )`, (err) => {
-    if (err) {
-      console.error('创建stock_records表失败:', err.message);
-    }
-  });
+  )`);
 }
+
+// 初始化数据库
+initDatabase();
+console.log('已成功连接到SQLite数据库');
 
 module.exports = db;
