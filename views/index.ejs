@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>化肥农药库存管理系统</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>化肥农药库存管理系统</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/" class="active">首页</a></li>
+      <li><a href="/stock-in">入库管理</a></li>
+      <li><a href="/stock-out">出库管理</a></li>
+      <li><a href="/inventory">库存查询</a></li>
+      <li><a href="/expiry-alert">过期提醒</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>欢迎使用库存管理系统</h2>
+      <p style="margin: 1rem 0;">本系统支持以下功能：</p>
+      <ul style="margin-left: 2rem; margin-bottom: 2rem;">
+        <li>条码扫描入库/出库，操作便捷</li>
+        <li>实时库存管理，支持按类型筛选</li>
+        <li>自动过期提醒，提前30天预警</li>
+        <li>响应式设计，支持手机和电脑使用</li>
+      </ul>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/stock-in" class="btn btn-success">立即入库</a>
+        <a href="/stock-out" class="btn btn-danger">立即出库</a>
+        <a href="/inventory" class="btn">查看库存</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>使用说明</h3>
+      <ul style="margin-left: 2rem;">
+        <li>手机端使用摄像头扫描需要HTTPS环境，建议部署到Vercel</li>
+        <li>本地部署时可以手动输入条码或使用外接扫码枪</li>
+        <li>数据存储在本地SQLite数据库中，请勿删除inventory.db文件</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

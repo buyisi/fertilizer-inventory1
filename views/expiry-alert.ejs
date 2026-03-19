@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>过期提醒 - 库存管理系统</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>化肥农药库存管理系统</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/">首页</a></li>
+      <li><a href="/stock-in">入库管理</a></li>
+      <li><a href="/stock-out">出库管理</a></li>
+      <li><a href="/inventory">库存查询</a></li>
+      <li><a href="/expiry-alert" class="active">过期提醒</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>即将过期产品（30天内）</h2>
+
+      <div id="alertList">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>条码</th>
+            <th>产品名称</th>
+            <th>类型</th>
+            <th>过期日期</th>
+            <th>剩余天数</th>
+            <th>库存数量</th>
+          </tr>
+        </thead>
+        <tbody id="expiryTable">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/expiry-alert.js"></script>
+</body>
+</html>

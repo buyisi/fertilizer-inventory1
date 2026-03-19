@@ -1,0 +1,20 @@
+{
+  "name": "test6",
+  "version": "1.0.0",
+  "description": "## 项目概述 本项目是一个简单的化肥农药库存管理系统，用于管理化肥和农药的入库、出库、库存跟踪和过期提醒。系统支持条码扫描功能，可以使用手机或电脑扫描器进行操作。",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "moment": "^2.30.1",
+    "sqlite3": "^6.0.1"
+  }
+}

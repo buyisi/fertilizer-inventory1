@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>库存查询 - 库存管理系统</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>化肥农药库存管理系统</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/">首页</a></li>
+      <li><a href="/stock-in">入库管理</a></li>
+      <li><a href="/stock-out">出库管理</a></li>
+      <li><a href="/inventory" class="active">库存查询</a></li>
+      <li><a href="/expiry-alert">过期提醒</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>库存列表</h2>
+
+      <div class="filter">
+        <label for="typeFilter">产品类型：</label>
+        <select id="typeFilter">
+          <option value="all">全部</option>
+          <option value="化肥">化肥</option>
+          <option value="农药">农药</option>
+        </select>
+        <button id="refreshBtn" class="btn">刷新</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>条码</th>
+            <th>产品名称</th>
+            <th>类型</th>
+            <th>规格</th>
+            <th>生产日期</th>
+            <th>过期日期</th>
+            <th>库存数量</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryTable">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/inventory.js"></script>
+</body>
+</html>
