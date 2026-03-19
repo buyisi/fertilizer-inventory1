@@ -1,36 +1,21 @@
-const Database = require('better-sqlite3');
-const path = require('path');
+const { Pool } = require('pg');
 
-const dbPath = path.join(__dirname, 'inventory.db');
-const db = new Database(dbPath, { verbose: console.log });
+// 直接配置Supabase连接字符串
+const pool = new Pool({
+  connectionString: 'postgresql://postgres:pandd6143306@db.ukecsklftzkffcvwbgdl.supabase.co:5432/postgres',
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-function initDatabase() {
-  db.exec(`CREATE TABLE IF NOT EXISTS products (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    barcode TEXT UNIQUE NOT NULL,
-    name TEXT NOT NULL,
-    type TEXT NOT NULL CHECK(type IN ('化肥', '农药')),
-    specification TEXT,
-    production_date TEXT NOT NULL,
-    expiry_date TEXT NOT NULL,
-    stock INTEGER NOT NULL DEFAULT 0,
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-  )`);
+// 测试连接
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error('数据库连接失败:', err.message);
+  } else {
+    console.log('已成功连接到Supabase PostgreSQL数据库');
+    release();
+  }
+});
 
-  db.exec(`CREATE TABLE IF NOT EXISTS stock_records (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_id INTEGER NOT NULL,
-    type TEXT NOT NULL CHECK(type IN ('in', 'out')),
-    quantity INTEGER NOT NULL,
-    remark TEXT,
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES products(id)
-  )`);
-}
-
-// 初始化数据库
-initDatabase();
-console.log('已成功连接到SQLite数据库');
-
-module.exports = db;
+module.exports = pool;
